@@ -1,0 +1,24 @@
+{
+  "name": "Virat Kohli",
+  "role": "Top Order Batter",
+  "birthDate": "1988-11-05",
+  "odi": { "matches": 292, "runs": 13848, "average": 58.6, "strikeRate": 93.6, "centuries": 50 },
+  "t20": { "matches": 116, "runs": 4008, "average": 52.7, "strikeRate": 137.0 },
+  "performanceByYear": [
+    { "year": 2018, "runs": 1200, "centuries": 7 },
+    { "year": 2019, "runs": 1200, "centuries": 4 },
+    { "year": 2020, "runs": 500, "centuries": 1 }
+  ],
+  "topInnings": [
+    { "title": "183 vs Pakistan", "match": "Asia Cup 2012", "runs": 183 },
+    { "title": "133* vs Sri Lanka", "match": "World Cup 2011", "runs": 133 }
+  ],
+  "facts": [
+    "Fastest to 8000 ODI runs in X innings",
+    "Multiple ICC awards"
+  ],
+  "timeline": [
+    { "date": "2008-08-18", "event": "India ODI debut" },
+    { "date": "2011-06-06", "event": "First World Cup" }
+  ]
+}
