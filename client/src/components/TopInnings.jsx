@@ -2,17 +2,25 @@ import React from "react";
 
 const TopInnings = ({ innings }) => {
   return (
-    <div className="bg-white shadow-md p-4 rounded-md">
-      <h2 className="text-xl font-semibold mb-4">Top Innings</h2>
-      <ul className="space-y-3">
-        {innings.map((inn, i) => (
-          <li key={i} className="p-3 border rounded-md">
-            <p className="font-bold">{inn.title}</p>
-            <p className="text-sm text-gray-600">{inn.match}</p>
-            <p className="text-blue-600 font-medium">{inn.runs} runs</p>
-          </li>
+    <div className="mt-10 animate-fade">
+      <h2 className="text-2xl font-bold text-gray-400 text-center mb-4">
+        Top Innings Highlights
+      </h2>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-4">
+        {innings.map((inn, index) => (
+          <div
+            key={index}
+            className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow card-hover border border-blue-200"
+          >
+            <h3 className="font-bold text-gray-800">{inn.title}</h3>
+            <p className="text-sm text-gray-600 mt-1">{inn.match}</p>
+            <p className="text-sm font-semibold text-blue-600 mt-2">
+              Runs: {inn.runs}
+            </p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -1,16 +1,20 @@
 import React from "react";
 
-const Facts = ({ facts }) => {
+const Fact = ({ text }) => {
+  if (!text) return null;
+
   return (
-    <div className="bg-white p-4 shadow-md rounded-md">
-      <h2 className="text-xl font-semibold mb-4">Quick Facts</h2>
-      <ul className="list-disc ml-6 space-y-2">
-        {facts.map((f, i) => (
-          <li key={i}>{f}</li>
-        ))}
-      </ul>
+    <div className="fact-hover glass-dark h-38 rounded-lg p-4 flex items-start gap-3 shadow-md animate-fade">
+
+      <div className="w-2 h-12 bg-linear-to-b from-cyan-400 to-blue-600 rounded-sm" />
+
+      <div>
+        <div className="text-xs text-gray-300">Fact of the day</div>
+        <div className="text-sm text-white mt-1">{text}</div>
+      </div>
+
     </div>
   );
 };
 
-export default Facts;
+export default Fact;

@@ -4,7 +4,7 @@ import kohliData from "../../data/kohliStats.json" with { type: "json" };
 
 const router = express.Router();
 
-// GET: Kohli stats + visit count
+// GET Method
 router.get("/stats", async (req, res) => {
   try {
     let doc = await VisitCount.findOne({ key: "kohliPage" });
