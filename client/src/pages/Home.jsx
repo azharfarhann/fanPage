@@ -7,6 +7,8 @@ import Description from "../components/Description";
 import Footer from "../components/Footer";
 import TopInnings from "../components/TopInnings";
 import AchievementBadges from "../components/AchievementBadges";
+import PollSection from "../components/PollSection";
+import CommentSection from "../components/CommentSection";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -40,8 +42,6 @@ const Home = () => {
 
   return (
     <div className="main-content max-w-5xl mx-auto px-4 py-8 space-y-10">
-
-      {/* STATS SECTION */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <VisitCard visits={visits} />
 
@@ -52,7 +52,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* PERFORMANCE + FACT */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="md:col-span-2 glass-dark rounded-lg p-4 space-y-6">
           <h3 className="text-white font-semibold mb-2">Performance by Year</h3>
@@ -64,7 +63,6 @@ const Home = () => {
         <Fact text={fact} />
       </div>
 
-      {/* ACHIEVEMENTS */}
       <AchievementBadges
         badges={[
           "100+ International Centuries",
@@ -74,7 +72,9 @@ const Home = () => {
         ]}
       />
 
-      {/* FOOTER */}
+      <PollSection />
+      <CommentSection />
+
       <Footer />
     </div>
   );
