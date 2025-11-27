@@ -17,7 +17,7 @@ router.get("/stats", async (req, res) => {
     }
 
     return res.status(200).json({
-      msg: "Kohli stats.",
+      msg: "Kohli statistics.",
       stats: kohliData,
       visits: doc.count,
       lastUpdated: new Date().toISOString()
@@ -27,5 +27,7 @@ router.get("/stats", async (req, res) => {
     return res.status(500).json({ msg: "Could not get Kohli stats." });
   }
 });
+
+
 
 export default router;

@@ -7,8 +7,8 @@ import Description from "../components/Description";
 import Footer from "../components/Footer";
 import TopInnings from "../components/TopInnings";
 import AchievementBadges from "../components/AchievementBadges";
-import PollSection from "../components/PollSection";
-import CommentSection from "../components/CommentSection";
+// import PollSection from "../components/PollSection";
+// import CommentSection from "../components/CommentSection";
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -72,8 +72,8 @@ const Home = () => {
         ]}
       />
 
-      <PollSection />
-      <CommentSection />
+      {/* <PollSection />
+      <CommentSection /> */}
 
       <Footer />
     </div>
