@@ -5,7 +5,7 @@ import  connectDB from "./utils/dbConnect.js";
 
 import kohliRoutes from "./controllers/kohli/index.js"
 import commentRoutes from "./controllers/comments/index.js"
-// import pollRoutes from "./controllers/polls/index.js"
+import pollRoutes from "./controllers/polls/index.js"
 
 dotenv.config();
 connectDB()
@@ -15,9 +15,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.use("/api/kohli", kohliRoutes);
 app.use("/api/kohli/comments", commentRoutes);
-// app.use("/api/kohli/poll", pollRoutes);
+app.use("/api/kohli/poll", pollRoutes);
+app.use("/api/kohli", kohliRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("Kohli backend running...");

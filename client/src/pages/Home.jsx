@@ -7,7 +7,7 @@ import Description from "../components/Description";
 import Footer from "../components/Footer";
 import TopInnings from "../components/TopInnings";
 import AchievementBadges from "../components/AchievementBadges";
-// import PollSection from "../components/PollSection";
+import PollSection from "../components/PollSection";
 import CommentSection from "../components/CommentSection";
 
 const Home = () => {
@@ -72,7 +72,7 @@ const Home = () => {
         ]}
       />
 
-      {/* <PollSection /> */}
+      <PollSection />
       <CommentSection />
 
       <Footer />

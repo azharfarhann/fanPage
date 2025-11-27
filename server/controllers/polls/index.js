@@ -133,7 +133,7 @@ router.post("/:id/vote", async (req, res) => {
       return res.status(400).json({ message: "Invalid option" });
     }
 
-    // simple increment and save (no atomic complexity)
+    // increment and save 
     poll.options[optionIndex].votes += 1;
     await poll.save();
 
