@@ -37,43 +37,109 @@
 
 
 // controllers/comments/index.js
+// import express from "express";
+// import Comment from "../../models/Comment.js"; 
+
+// const router = express.Router();
+
+// // GET latest 5 comments + total
+// router.get("/", async (req, res) => {
+//   try {
+//     const latestComments = await Comment.find().sort({ createdAt: -1 }).limit(5);
+//     const total = await Comment.countDocuments();
+//     return res.status(200).json({ latestComments, total });
+//   } catch (err) {
+//     console.error("GET /comments error:", err);
+//     return res.status(500).json({ message: "Server error" });
+//   }
+// });
+
+// // POST add comment 
+// router.post("/", async (req, res) => {
+//   try {
+//     const { name = "Guest", text = "" } = req.body;
+//     if (!text || !text.trim()) {
+//       return res.status(400).json({ message: "Comment text required" });
+//     }
+
+//     const comment = await Comment.create({
+//       name: String(name).trim() || "Guest",
+//       text: String(text).trim()
+//     });
+
+//     const latestComments = await Comment.find().sort({ createdAt: -1 }).limit(5);
+//     const total = await Comment.countDocuments();
+
+//     return res.status(201).json({ comment, latestComments, total });
+//   } catch (err) {
+//     console.error("POST /comments error:", err);
+//     return res.status(500).json({ message: "Server error" });
+//   }
+// });
+
+// export default router;
+
+
+// ************************************************************************************* //
+
 import express from "express";
-import Comment from "../../models/Comment.js"; 
+import Comment from "../../models/Comment.js";
 
 const router = express.Router();
 
-// GET latest 5 comments + total
+// GET latest 5 comments + total count
 router.get("/", async (req, res) => {
   try {
-    const latestComments = await Comment.find().sort({ createdAt: -1 }).limit(5);
+    const comments = await Comment.find()
+      .sort({ createdAt: -1 })
+      .limit(5);
+
     const total = await Comment.countDocuments();
-    return res.json({ latestComments, total });
+
+    res.json({ comments, total });
+
   } catch (err) {
-    console.error("GET /comments error:", err);
-    return res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 });
 
-// POST add comment 
+// ADD comment
 router.post("/", async (req, res) => {
   try {
-    const { name = "Guest", text = "" } = req.body;
+    const { name, text } = req.body;
+
     if (!text || !text.trim()) {
-      return res.status(400).json({ message: "Comment text required" });
+      return res.status(400).json({ message: "Comment required" });
     }
 
     const comment = await Comment.create({
-      name: String(name).trim() || "Guest",
-      text: String(text).trim()
+      name: name || "Guest",
+      text: text.trim()
     });
 
-    const latestComments = await Comment.find().sort({ createdAt: -1 }).limit(5);
-    const total = await Comment.countDocuments();
+    res.status(201).json({ message: "Comment added.", comment });
 
-    return res.status(201).json({ comment, latestComments, total });
   } catch (err) {
-    console.error("POST /comments error:", err);
-    return res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// DELETE comment (admin only)
+// Client should send header: X-Admin-Token: <token>
+router.delete("/:id", async (req, res) => {
+  try {
+    const adminToken = req.get("X-Admin-Token") ;
+    if (!adminToken || adminToken !== process.env.ADMIN_TOKEN) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    const deleted = await Comment.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ message: "Not found" });
+
+    return res.status(200).json({ message: "Deleted" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Delete failed." });
   }
 });
 
