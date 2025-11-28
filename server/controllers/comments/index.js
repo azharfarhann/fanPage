@@ -128,7 +128,7 @@ router.post("/", async (req, res) => {
 // Client should send header: X-Admin-Token: <token>
 router.delete("/:id", async (req, res) => {
   try {
-    const adminToken = req.get("X-Admin-Token") ;
+    const adminToken = req.get("x-admin-token") ;
     if (!adminToken || adminToken !== process.env.ADMIN_TOKEN) {
       return res.status(401).json({ message: "Unauthorized" });
     }
@@ -138,7 +138,7 @@ router.delete("/:id", async (req, res) => {
 
     return res.status(200).json({ message: "Deleted" });
   } catch (err) {
-    console.log(err);
+    console.log("DELETE /COMMENTS ERROR:", err);
     return res.status(500).json({ message: "Delete failed." });
   }
 });

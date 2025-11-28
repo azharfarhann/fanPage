@@ -193,8 +193,12 @@ router.post("/", async (req, res) => {
 
     const { question, options } = req.body;
 
-    if (!question || !question.trim() || !Array.isArray(options) || options.length < 2) {
-      return res.status(400).json({ message: "Invalid poll data" });
+    if (!question || !question.trim()){
+            return res.status(400).json({ message: "question required" });
+
+    } 
+    if (!Array.isArray(options) || options.length < 2) {
+      return res.status(400).json({ message: "At least 2 options required" });
     }
 
     const poll = await Poll.create({
@@ -202,7 +206,7 @@ router.post("/", async (req, res) => {
       options: options.map(opt => ({ text: opt.trim(), votes: 0 }))
     });
 
-    res.status(201).json(poll);
+    return res.status(201).json({poll});
   } catch (err) {
     res.status(500).json({ message: "Server error", err });
   }
