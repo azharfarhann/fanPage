@@ -96,10 +96,21 @@ router.get("/", async (req, res) => {
 
     const total = await Comment.countDocuments();
 
-    res.json({ comments, total });
+    return res.status(200).json({ latestComments: comments, total: total });
 
   } catch (err) {
     res.status(500).json({ message: "Server error" });
+  }
+});
+
+// GET all comments
+router.get("/all", async (req, res) => {
+  try {
+    const comments = await Comment.find().sort({ createdAt: -1 });
+    return res.status(200).json({ comments, total: comments.length });
+  } catch (err) {
+    console.log("GET /comments/all error:", err);
+    return res.status(500).json({ message: "Server error" });
   }
 });
 
@@ -128,7 +139,7 @@ router.post("/", async (req, res) => {
 // Client should send header: X-Admin-Token: <token>
 router.delete("/:id", async (req, res) => {
   try {
-    const adminToken = req.get("x-admin-token") ;
+    const adminToken = req.get("x-admin-token") ;  // reads header
     if (!adminToken || adminToken !== process.env.ADMIN_TOKEN) {
       return res.status(401).json({ message: "Unauthorized" });
     }

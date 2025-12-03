@@ -18,7 +18,6 @@ const Home = () => {
       try {
         const res = await fetch("/api/kohli/stats");
         const json = await res.json();
-        console.log("API:", json);
         setData(json);
       } catch (err) {
         console.log("Fetch error:", err);
@@ -46,9 +45,9 @@ const Home = () => {
         <VisitCard visits={visits} />
 
         <div className="md:col-span-3 card-hover rounded-xl p-4 shadow-md grid grid-cols-1 sm:grid-cols-3 gap-4 bg-white/70 backdrop-blur-sm">
-          <StatsCard title="ODI Runs" value={stats.odi.runs} />
-          <StatsCard title="T20 Runs" value={stats.t20.runs} />
-          <StatsCard title="ODI 100s" value={stats.odi.centuries} />
+          <StatsCard title="ODI Runs" value={stats?.odi?.runs} />
+          <StatsCard title="T20 Runs" value={stats?.t20?.runs} />
+          <StatsCard title="ODI 100s" value={stats?.odi?.centuries} />
         </div>
       </div>
 
@@ -72,8 +71,10 @@ const Home = () => {
         ]}
       />
 
-      <PollSection />
-      <CommentSection />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <PollSection/>
+        <CommentSection />
+      </div>
 
       <Footer />
     </div>
